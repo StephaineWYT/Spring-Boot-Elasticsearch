@@ -47,7 +47,7 @@ public class WebController {
                        @RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                        @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
     Model model) {
-        Pageable pageable = new PageRequest(pageIndex,pageSize);
+        Pageable pageable = PageRequest.of(pageIndex - 1, pageSize);
         Page<Poem> poems = poemService.findAll(pageable);
         List<Poem> poems1 = poems.getContent();
         model.addAttribute("poems",poems);
@@ -59,7 +59,7 @@ public class WebController {
                          @RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                          @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
                          Model model) {
-        Pageable pageable = new PageRequest(pageIndex,pageSize);
+        Pageable pageable = PageRequest.of(pageIndex - 1, pageSize);
         Page<Poem> poems = poemService.search(content,pageable);
         List<Poem> list = poems.getContent();
         model.addAttribute("poems",list);
@@ -69,7 +69,7 @@ public class WebController {
     @RequestMapping("/search")
     public String search(String content, @RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                          @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,Model model) {
-                Pageable pageable = new PageRequest(pageIndex,pageSize);
+                Pageable pageable = PageRequest.of(pageIndex - 1, pageSize);
                 Page<Poem> poems = poemService.search(content,pageable);
                 List<Poem> list = poems.getContent();
                 model.addAttribute("poems",list);
